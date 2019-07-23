@@ -18,6 +18,6 @@ from django.urls import path, re_path
 import mainapp.views as mainapp
 
 urlpatterns = [
-    re_path(r'^$', mainapp.views.index),
+    re_path(r'^$', mainapp.index),
     path('admin/', admin.site.urls),
 ]

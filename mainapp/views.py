@@ -4,9 +4,9 @@ from django.shortcuts import render
 
 def index(request):
     context = {
-        'page_title': 'Магазин',
+        'page_title': 'Магазин1',
     }
-    return render(request, 'mainapp/index.html')
+    return render(request, 'mainapp/index.html', context)
 
 def contact(request):
     return render(request, 'mainapp/contact.html')

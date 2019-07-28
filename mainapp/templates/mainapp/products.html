@@ -2,8 +2,9 @@
 {% load static %}
 {% block container %}
 <div class="container">
-
-
+    {% include 'mainapp/includes/inc__main_menu.html' %}
+    <div class="hero-white">
+    </div>
     <div class="details">
         <div class="links clearfix">
             <ul class="links-menu">
@@ -94,4 +95,4 @@
             </div>
         </div>
     </div>
-{% endblock %}
+    {% endblock %}

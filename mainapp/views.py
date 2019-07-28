@@ -32,6 +32,7 @@ def contact(request):
     ]
     context = {
         'page_title': 'Контакты',
+        'locations': 'locations',
     }
     return render(request, 'mainapp/contact.html', context)
 

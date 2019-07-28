@@ -8,7 +8,6 @@ def index(request):
     }
     return render(request, 'mainapp/index.html', context)
 
-
 def contact(request):
     context = {
         'page_title': 'Контакты',
@@ -16,4 +15,7 @@ def contact(request):
     return render(request, 'mainapp/contact.html', context)
 
 def products(request):
-    return render(request, 'mainapp/products.html')
+    context = {
+        'page_title': 'Товары',
+    }
+    return render(request, 'mainapp/products.html', context)

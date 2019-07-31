@@ -10,10 +10,10 @@
         <div class="links clearfix">
             <ul class="links-menu">
                 <li><a href="#" class="active">все</a></li>
-                <li><a href="#">дом</a></li>
-                <li><a href="#">офис</a></li>
-                <li><a href="#">модерн</a></li>
-                <li><a href="#">классика</a></li>
+                <li><a href="#">шкафы</a></li>
+                <li><a href="#">ковры</a></li>
+                <li><a href="#">освещение</a></li>
+                <li><a href="#">столы</a></li>
             </ul>
         </div>
 
@@ -68,7 +68,7 @@
                 {% for product in same_products %}
 
                 <div class="block">
-                    <a href="#"><img src="{{ product.image.url }}" alt="" width="400">
+                    <a href="#"><img src="/media/{{ product.image }}" alt="" width="400">
                         <div class="text">
                             <img src="{% static 'img/icon-hover.png' %}" alt="img">
                             <h4>{{ product.name }}</h4>

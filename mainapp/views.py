@@ -1,6 +1,8 @@
 from django.shortcuts import render
 
 # Create your views here.
+from mainapp.models import Product
+
 
 def index(request):
     context = {
@@ -37,6 +39,7 @@ def contact(request):
     return render(request, 'mainapp/contact.html', context)
 
 def products(request):
+    same_products = Product.objects.all()
     context = {
         'page_title': 'Товары',
     }

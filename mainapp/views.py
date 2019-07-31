@@ -40,7 +40,9 @@ def contact(request):
 
 def products(request):
     same_products = Product.objects.all()
+
     context = {
         'page_title': 'Товары',
+        'same_products': same_products,
     }
     return render(request, 'mainapp/products.html', context)

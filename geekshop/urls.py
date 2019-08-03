@@ -19,7 +19,7 @@ import mainapp.views as mainapp
 
 urlpatterns = [
     re_path(r'^', include('mainapp.urls', namespace='main')),
-    re_path(r'^', include('authapp.urls', namespace='auth')),
+    re_path(r'^auth/', include('authapp.urls', namespace='auth')),
 
     path('admin/', admin.site.urls),
 ]

@@ -30,4 +30,4 @@ class Command(BaseCommand):
 
         # creating superuser with our model
         if not ShopUser.objects.filter(username="django").exists():
-            super_user = ShopUser.objects.create_superuser('django', 'django@geekshop.local', 'geekbrains')
+            super_user = ShopUser.objects.create_superuser('django', 'django@geekshop.local', 'geekbrains', age=33)

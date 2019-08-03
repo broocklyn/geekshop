@@ -1,6 +1,7 @@
 from django.shortcuts import render
 
-def login(request)
+
+def login(request):
     pass
 
 # Create your views here.

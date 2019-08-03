@@ -5,4 +5,4 @@ def login(request):
     context = {
 
     }
-    return request(request, 'authapp/login.html', context)
+    return render(request, 'authapp/login.html', context)

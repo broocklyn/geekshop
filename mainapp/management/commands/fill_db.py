@@ -22,9 +22,7 @@ class Command(BaseCommand):
         categories = load_from_json('categories')
 
         ProductCategory.objects.all().delete()
-        for category in categories:
-            new_category = ProductCategory(**category)
-            new_category.save()
+        [ProductCategory.objects.create(**category) for category in categories]
 
         products = load_from_json('products')
 
@@ -38,4 +36,6 @@ class Command(BaseCommand):
             new_product = Product(**product)
             new_product.save()
 
+        # creating superuser with our model
+        super_user = User.objects.create_superuser('django', 'django@geekshop.local', 'geekbrains')
 

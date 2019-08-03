@@ -26,3 +26,16 @@ class Command(BaseCommand):
             new_category = ProductCategory(**category)
             new_category.save()
 
+        products = load_from_json('products')
+
+        Product.objects.all().delete()
+        for product in products:
+            category_name = product["category"]
+            # get category by name
+            _category = ProductCategory.objects.get(name=category_name)
+            # change cat name to object
+            product['category'] = _category
+            new_product = Product(**product)
+            new_product.save()
+
+

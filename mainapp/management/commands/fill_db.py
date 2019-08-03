@@ -7,9 +7,6 @@ from django.contrib.auth.models import User
 from django.conf import settings
 
 
-
-
-
 def load_from_json(file_name):
     with open(os.path.join(JSON_PATH, file_name + '.json'), 'r', encoding='utf-8') as infile:
         return json.load(infile)
@@ -30,8 +27,6 @@ class Command(BaseCommand):
             product['category'] = ProductCategory.objects.get(name=product["category"])
             Product.objects.create(**product)
 
-
         # creating superuser with our model
-        if not User.objects.filter()
-        super_user = User.objects.create_superuser('django', 'django@geekshop.local', 'geekbrains')
-
+        if not User.objects.filter(username="django").exists():
+            super_user = User.objects.create_superuser('django', 'django@geekshop.local', 'geekbrains')

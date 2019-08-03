@@ -32,5 +32,6 @@ class Command(BaseCommand):
 
 
         # creating superuser with our model
+        if not User.objects.filter()
         super_user = User.objects.create_superuser('django', 'django@geekshop.local', 'geekbrains')
 

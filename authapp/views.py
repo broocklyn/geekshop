@@ -2,6 +2,4 @@ from django.shortcuts import render
 
 
 def login(request):
-    pass
-
-# Create your views here.
+    return request(request, 'authapp/login.html')

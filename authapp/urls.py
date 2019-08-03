@@ -4,6 +4,6 @@ import authapp.views as authapp
 app_name = 'authapp'
 
 urlpatterns = [
-    re_path(r'^login/$', authapp.index, name='index'),
+    re_path(r'^login/$', authapp.login, name='login'),
 
 ]

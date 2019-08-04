@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.urls import reverse
 
 from authapp.forms import ShopUserLoginForm
 from django.contrib import auth
@@ -14,7 +15,7 @@ def login(request):
             user = auth.authenticate(username=username, password=password)
             if user and user.is_active:
                 auth.login(request, user)
-                return HttpResponseRedirect('/')
+                return HttpResponseRedirect(reverse('main:index'))
     else:
         form = ShopUserLoginForm()
 
@@ -26,4 +27,4 @@ def login(request):
 
 def logout(request):
     auth.logout(request)
-    return HttpResponseRedirect('/')
+    return HttpResponseRedirect(reverse('main:index'))

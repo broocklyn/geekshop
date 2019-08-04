@@ -11,8 +11,8 @@ def login(request):
             username = request.POST['username']
             password = request.POST['password']
             user = auth.authenticate(username=username, password=password)
-            if user and user. is.active:
-                auth.login(request)
+            if user and user.is_active:
+                auth.login(request, user)
     else:
         form = ShopUserLoginForm()
 

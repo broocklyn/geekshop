@@ -6,6 +6,7 @@ from django.contrib import auth
 from django.http import HttpResponseRedirect
 from authapp.forms import ShopUserRegisterForm
 
+
 def login(request):
     if request.method == 'POST':
         form = ShopUserLoginForm(data=request.POST)
@@ -40,7 +41,7 @@ def register(request):
             register_form.save()
             return HttpResponseRedirect(reverse('auth:login'))
     else:
-        register_form = ShopUserRegisterForm()
+        form = ShopUserRegisterForm()
 
     content = {
         'title': 'регистрация в системе',

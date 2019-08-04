@@ -1,11 +1,18 @@
-
-    <div class="header clearfix">
-        <a href="{% url 'main:index' %}" class="logo"></a>
-				<ul class="menu">
-					<li><a href="{% url 'main:index' %}" class="{% if request.resolver_match.url_name == 'index' %}active{% endif %}">домой</a></li>
-					<li><a href="{% url 'main:products' %}" class="{% if request.resolver_match.url_name == 'products' %}active{% endif %}">продукты</a></li>
-					<li><a href="{% url 'main:contact' %}" class="{% if request.resolver_match.url_name == 'contact' %}active{% endif %}">контакты</a></li>
-				</ul>
-        <a href="#" class="search"></a>
-        <a href="#" class="basket"></a>
-    </div>
+<div class="header clearfix">
+    <a href="{% url 'main:index' %}" class="logo"></a>
+    <ul class="menu">
+        <li><a href="{% url 'main:index' %}"
+               class="{% if request.resolver_match.url_name == 'index' %}active{% endif %}">домой</a></li>
+        <li><a href="{% url 'main:products' %}"
+               class="{% if request.resolver_match.url_name == 'products' %}active{% endif %}">продукты</a></li>
+        <li><a href="{% url 'main:contact' %}"
+               class="{% if request.resolver_match.url_name == 'contact' %}active{% endif %}">контакты</a></li>
+        <li>{% if user.is_authenticated %}
+            <a href="{#% url 'authapp:logout' %#}">выход</a>
+            {% else %}
+            <a href="{% url 'authapp:login' %}">вход</a>
+        </li>
+    </ul>
+    <a href="#" class="search"></a>
+    <a href="#" class="basket"></a>
+</div>

@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 from authapp.forms import ShopUserLoginForm
 from django.contrib import auth
-
+from django.http import HttpResponseRedirect
 
 def login(request):
     if request.method == 'POST':

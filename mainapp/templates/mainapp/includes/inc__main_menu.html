@@ -9,7 +9,7 @@
                class="{% if request.resolver_match.url_name == 'contact' %}active{% endif %}">контакты</a></li>
         {% if user.is_authenticated %}
         <li>
-            <a href="{% url 'authapp:edit' %}">{{ user.first_name|default:'пользователь' }}</a>
+            <a href="{% url 'authapp:update' %}">{{ user.first_name|default:'пользователь' }}</a>
         </li>
         {% endif %}
         <li>

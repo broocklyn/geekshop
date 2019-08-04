@@ -4,6 +4,7 @@ from authapp.forms import ShopUserLoginForm
 from django.contrib import auth
 from django.http import HttpResponseRedirect
 
+
 def login(request):
     if request.method == 'POST':
         form = ShopUserLoginForm(data=request.POST)
@@ -21,6 +22,7 @@ def login(request):
         'form': form,
     }
     return render(request, 'authapp/login.html', context)
+
 
 def logout(request):
     auth.logout(request)

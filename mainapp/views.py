@@ -10,6 +10,7 @@ def index(request):
     }
     return render(request, 'mainapp/index.html', context)
 
+
 def contact(request):
     locations = [
         {
@@ -37,6 +38,7 @@ def contact(request):
         'locations': locations,
     }
     return render(request, 'mainapp/contact.html', context)
+
 
 def products(request):
     same_products = Product.objects.all()

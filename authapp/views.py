@@ -33,7 +33,6 @@ def logout(request):
 
 
 def register(request):
-
     if request.method == 'POST':
         register_form = ShopUserRegisterForm(request.POST, request.FILES)
 
@@ -50,17 +49,18 @@ def register(request):
     return render(request, 'authapp/register.html', content)
 
 
-def edit(request):
-    title = 'редактирование'
-
+def update(request):
     if request.method == 'POST':
-        edit_form = ShopUserEditForm(request.POST, request.FILES, instance=request.user)
-        if edit_form.is_valid():
-            edit_form.save()
+        form = ShopUserEditForm(request.POST, request.FILES, instance=request.user)
+        if form.is_valid():
+            form.save()
             return HttpResponseRedirect(reverse('auth:edit'))
     else:
-        edit_form = ShopUserEditForm(instance=request.user)
+        form = ShopUserEditForm(instance=request.user)
 
-    content = {'title': title, 'edit_form': edit_form}
+    context = {
+        'title': 'редактирование',
+        'edit_form': form
+    }
 
-    return render(request, 'authapp/edit.html', content)
+    return render(request, 'authapp/update.html', context)

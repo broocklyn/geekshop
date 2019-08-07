@@ -22,8 +22,9 @@
         </li>
     </ul>
     <a href="#" class="search"></a>
-    <a href="#" class="basket"></a>
-    {% if basket %}
-
-    {% endif %}
+    <a href="#" class="basket">
+        {% if basket %}
+        <span>{{ basket|length }}</span>
+        {% endif %}
+    </a>
 </div>

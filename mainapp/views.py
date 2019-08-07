@@ -64,15 +64,15 @@ def category(request, pk):
         }
         category_products = Product.objects.all()
     else:
-        #   category = ProductCategory.objects.get(pk=pk)
         category = get_object_or_404(ProductCategory, pk=pk)
         #   category = ProductCategory.objects.filter(pk=pk).first()
+        #   category = ProductCategory.objects.get(pk=pk)
         category_products = category.product_set.all()
     #       category_products = Product.objects.filter(category=pk)
     context = {
         'page_title': 'Товары',
         'products_menu': get_products_menu(),
-        'category_': category,
+        'category': category,
         'category_products': category_products,
 
     }

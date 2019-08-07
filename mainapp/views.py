@@ -76,4 +76,4 @@ def category(request, pk):
         'category_products': category_products,
 
     }
-    return render(request, 'mainapp/products.html', context)
+    return render(request, 'mainapp/category_products.html', context)

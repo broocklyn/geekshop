@@ -1,6 +1,6 @@
 {% extends 'mainapp/base.html' %}
 {% load static %}
-  {% block container %}
+{% block container %}
 <div class="container">
 
     <div class="hero-white">
@@ -8,13 +8,8 @@
     </div>
     <div class="details">
         <div class="links clearfix">
-            <ul class="links-menu">
-                <li><a href="#" class="active">все</a></li>
-                <li><a href="#">шкафы</a></li>
-                <li><a href="#">ковры</a></li>
-                <li><a href="#">освещение</a></li>
-                <li><a href="#">столы</a></li>
-            </ul>
+            {% include 'mainapp/includes/inc__products_menu.html' %}
+
         </div>
 
         <div class="details-products">

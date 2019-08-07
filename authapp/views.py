@@ -55,7 +55,7 @@ def update(request):
         form = ShopUserUpdateForm(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('auth:edit'))
+            return HttpResponseRedirect(reverse('auth:update'))
     else:
         form = ShopUserUpdateForm(instance=request.user)
 

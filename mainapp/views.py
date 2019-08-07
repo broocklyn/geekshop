@@ -8,6 +8,13 @@ def get_products_menu():
     return ProductCategory.objects.all()
 
 
+def get_basket(request):
+    if request.user.is_authenticated:
+        return request.user.basket.all()
+    else:
+        return []
+
+
 def index(request):
     context = {
         'page_title': 'Магазин',

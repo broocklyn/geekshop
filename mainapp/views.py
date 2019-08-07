@@ -57,10 +57,11 @@ def products(request):
 
 def category(request, pk):
     pk = int(pk)
-
+    category_products = Product.objects.filter(category=pk)
     context = {
         'page_title': 'Товары',
         'products_menu': get_products_menu(),
+        'category_products': category_products,
 
     }
     return render(request, 'mainapp/products.html', context)

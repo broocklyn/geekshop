@@ -53,3 +53,14 @@ def products(request):
         'same_products': same_products,
     }
     return render(request, 'mainapp/products.html', context)
+
+
+def category(request, pk):
+    print(pk)
+
+    context = {
+        'page_title': 'Товары',
+        'products_menu': get_products_menu(),
+
+    }
+    return render(request, 'mainapp/products.html', context)

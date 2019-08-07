@@ -49,6 +49,7 @@ def products(request):
 
     context = {
         'page_title': 'Товары',
+        'products_menu': get_products_menu(),
         'same_products': same_products,
     }
     return render(request, 'mainapp/products.html', context)

@@ -56,7 +56,7 @@ def products(request):
 
 
 def category(request, pk):
-    print(pk)
+    pk = int(pk)
 
     context = {
         'page_title': 'Товары',

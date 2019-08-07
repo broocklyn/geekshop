@@ -45,7 +45,7 @@ def contact(request):
 
 
 def products(request):
-    same_products = Product.objects.all()
+    same_products = Product.objects.all()[:3]
 
     context = {
         'page_title': 'Товары',

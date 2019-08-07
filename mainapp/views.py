@@ -1,7 +1,11 @@
 from django.shortcuts import render
 
 # Create your views here.
-from mainapp.models import Product
+from mainapp.models import Product, ProductCategory
+
+
+def get_products_menu():
+    return ProductCategory.objects.all()
 
 
 def index(request):

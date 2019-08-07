@@ -18,6 +18,8 @@ def get_basket(request):
 def index(request):
     context = {
         'page_title': 'Магазин',
+        'basket': get_basket(request),
+
     }
     return render(request, 'mainapp/index.html', context)
 
@@ -47,6 +49,8 @@ def contact(request):
     context = {
         'page_title': 'Контакты',
         'locations': locations,
+        'basket': get_basket(request),
+
     }
     return render(request, 'mainapp/contact.html', context)
 
@@ -58,6 +62,8 @@ def products(request):
         'page_title': 'Товары',
         'products_menu': get_products_menu(),
         'same_products': same_products,
+        'basket': get_basket(request),
+
     }
     return render(request, 'mainapp/products.html', context)
 
@@ -81,6 +87,7 @@ def category(request, pk):
         'products_menu': get_products_menu(),
         'category': category,
         'category_products': category_products,
+        'basket': get_basket(request),
 
     }
     return render(request, 'mainapp/category_products.html', context)

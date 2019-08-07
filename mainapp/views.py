@@ -58,11 +58,16 @@ def products(request):
 def category(request, pk):
     pk = int(pk)
     if pk == 0:
+        category = {
+            'pk': 0,
+            'name': 'все'
+        }
         category_products = Product.objects.all()
     else:
-        category = ProductCategory.objects.filter(pk=pk).first()
+        category = ProductCategory.objects.get(pk=pk)
+    #        category = ProductCategory.objects.filter(pk=pk).first()
         category_products = category.product_set.all()
-#        category_products = Product.objects.filter(category=pk)
+    #        category_products = Product.objects.filter(category=pk)
     context = {
         'page_title': 'Товары',
         'products_menu': get_products_menu(),

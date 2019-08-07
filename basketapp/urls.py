@@ -4,7 +4,7 @@ import basketapp.views as basketapp
 app_name = 'basketapp'
 
 urlpatterns = [
-    re_path(r'^/$', basketapp.index, name='index'),
+    re_path(r'^$', basketapp.index, name='index'),
 
 
 ]

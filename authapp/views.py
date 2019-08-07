@@ -61,7 +61,7 @@ def update(request):
 
     context = {
         'title': 'редактирование',
-        'edit_form': form
+        'form': form
     }
 
     return render(request, 'authapp/update.html', context)

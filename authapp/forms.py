@@ -1,5 +1,5 @@
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
-from django.forms import forms
+from django.forms import forms, HiddenInput
 
 from authapp.models import ShopUser
 
@@ -45,11 +45,11 @@ class ShopUserUpdateForm(UserChangeForm):
             field.widget.attrs['class'] = 'form-control'
             field.help_text = ''
             if field_name == 'password':
-                field.widget = forms.HiddenInput()
+                field.widget = HiddenInput()
 
-        def clean_age(self):
-            data = self.cleaned_data['age']
-            if data < 18:
-                raise forms.ValidationError("Вы слишком молоды!")
+    def clean_age(self):
+        data = self.cleaned_data['age']
+        if data < 18:
+            raise forms.ValidationError("Вы слишком молоды!")
 
-            return data
+        return data

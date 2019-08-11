@@ -24,7 +24,7 @@
     <a href="#" class="search"></a>
     <a href="#" class="basket">
         {% if basket %}
-        <span>{{ basket|length }}</span>
+        <span>{{ basket.total_quantity }}</span>
         {% endif %}
     </a>
 </div>

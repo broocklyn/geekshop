@@ -20,6 +20,12 @@ def index(request):
 
 @login_required
 def basket_add(request, pk):
+    if 'login' in request.META.get('HTTP_REFERER'):
+        return HttpResponseRedirect(reverse('main:product',
+                                            kwargs={
+                                                'pk': pk
+                                            }))
+
     product = get_object_or_404(Product, pk=pk)
     basket_item = Basket.objects.filter(user=request.user,
                                         product=product).first()
@@ -32,6 +38,7 @@ def basket_add(request, pk):
                               quantity=1)
 
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
 
 @login_required
 def basket_delete(request, pk):

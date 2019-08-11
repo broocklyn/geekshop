@@ -17,6 +17,7 @@ def login(request):
             password = request.POST['password']
             user = auth.authenticate(username=username, password=password)
             if user and user.is_active:
+                next = request.POST['next'] if 'next' in request.POST.keys() else None
                 auth.login(request, user)
                 return HttpResponseRedirect(reverse('main:index'))
     else:
@@ -25,6 +26,7 @@ def login(request):
     context = {
         'title': 'вход в систему',
         'form': form,
+        'next': next,
     }
     return render(request, 'authapp/login.html', context)
 

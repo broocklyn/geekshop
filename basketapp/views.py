@@ -46,3 +46,9 @@ def basket_add(request, pk):
 def basket_delete(request, pk):
     get_object_or_404(Basket, pk=pk).delete()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+def basket_update(request, pk, quantity):
+    if request.is_ajax():
+        basket_obj = get_object_or_404(Basket, pk=pk)
+        print(basket_obj, quantity)
+        # return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

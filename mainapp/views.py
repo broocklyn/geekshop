@@ -1,3 +1,5 @@
+import random
+
 from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
@@ -13,6 +15,12 @@ def get_basket(request):
         return request.user.basket.all()
     else:
         return []
+
+
+def get_hot_product():
+    products = Product.objects.all()
+
+    return random.choice(products)
 
 
 def index(request):

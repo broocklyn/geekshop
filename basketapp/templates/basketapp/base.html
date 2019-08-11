@@ -14,14 +14,14 @@
     {% endblock %}
 </head>
 <body>
-<div class="container">
+<div class="basket-container">
+    <div class="h2 text-center head">
+        Ваша корзина, {{ user.first_name|title|default:'Пользователь' }}
+    </div>
     {% block container %}
-
     {% endblock %}
-
-    <div class="clr"></div>
-
 </div>
+
 <div class="footer">
     <div class="clearfix">
         <div class="text-footer">

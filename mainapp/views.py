@@ -91,7 +91,7 @@ def category(request, pk):
         category_products = category.product_set.all()
     #       category_products = Product.objects.filter(category=pk)
     context = {
-        'page_title': 'Товары',
+        'page_title': 'раздел каталога товаров',
         'products_menu': get_products_menu(),
         'category': category,
         'category_products': category_products,
@@ -99,3 +99,16 @@ def category(request, pk):
 
     }
     return render(request, 'mainapp/category_products.html', context)
+
+def product(request, pk):
+    product = get_object_or_404(Product, pk=pk)
+
+    context = {
+        'page_title': 'страница подукта',
+        'products_menu': get_products_menu(),
+        'category': product.category,
+        'object': product,
+        'basket': get_basket(request),
+    }
+    return render(request, 'mainapp/product_page.html', context)
+

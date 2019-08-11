@@ -19,7 +19,7 @@ def login(request):
             if user and user.is_active:
                 next = request.POST['next'] if 'next' in request.POST.keys() else None
                 auth.login(request, user)
-                return HttpResponseRedirect(reverse('main:index'))
+                return HttpResponseRedirect(reverse('main:index') if not next else next)
     else:
         form = ShopUserLoginForm()
 

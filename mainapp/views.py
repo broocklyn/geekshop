@@ -18,9 +18,7 @@ def get_basket(request):
 
 
 def get_hot_product():
-    products = Product.objects.all()
-
-    return random.choice(products)
+    return random.choice(Product.objects.all())
 
 
 def index(request):
@@ -69,6 +67,7 @@ def products(request):
     context = {
         'page_title': 'Товары',
         'products_menu': get_products_menu(),
+        'hot_product': get_hot_product(),
         'same_products': same_products,
         'basket': get_basket(request),
 

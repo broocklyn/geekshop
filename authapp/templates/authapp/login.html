@@ -9,7 +9,9 @@
 
 <form method="post">
     {% csrf_token %}
+    {% if next %}
     <input type="hidden" name="next" value="{{ next }}">
+    {% endif %}
     {{ form.as_p }}
     <br>
     <input class="form-control" type="submit" value="войти">

@@ -5,10 +5,17 @@ from django.shortcuts import render, get_object_or_404
 # Create your views here.
 from basketapp.models import Basket
 from mainapp.models import Product
+from mainapp.views import get_basket
 
 
-def index():
-    pass
+@login_required
+def index(request):
+    context = {
+        'page_title': 'корзина',
+        'basket': get_basket(request),
+
+    }
+    return render(request, 'basketapp/index.html', context)
 
 
 @login_required

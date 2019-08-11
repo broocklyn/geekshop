@@ -20,6 +20,8 @@ def get_basket(request):
 def get_hot_product():
     return random.choice(Product.objects.all())
 
+def same_products(hot_product):
+    return hot_product.category.product_set.exclude(pk=hot_product.pk)
 
 def index(request):
     context = {
@@ -62,13 +64,12 @@ def contact(request):
 
 
 def products(request):
-    same_products = Product.objects.all()[:3]
-
+    hot_product = get_hot_product()
     context = {
         'page_title': 'Товары',
         'products_menu': get_products_menu(),
-        'hot_product': get_hot_product(),
-        'same_products': same_products,
+        'hot_product': hot_product,
+        'same_products': same_products(hot_product),
         'basket': get_basket(request),
 
     }

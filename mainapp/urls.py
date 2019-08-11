@@ -8,6 +8,6 @@ urlpatterns = [
     re_path(r'^products/$', mainapp.products, name='products'),
     # path('category/<int:pk>/', mainapp.category, name='category'),
     re_path(r'^category/(?P<pk>\d+)$', mainapp.category, name='category'),
-
+    re_path(r'^product/(?P<pk>\d+)$', mainapp.product, name='product'),
     re_path(r'^contact/$', mainapp.contact, name='contact')
 ]

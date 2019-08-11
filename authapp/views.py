@@ -8,6 +8,8 @@ from authapp.forms import ShopUserRegisterForm
 
 
 def login(request):
+    next = request.GET['next'] if 'next' in request.GET.keys() else None
+
     if request.method == 'POST':
         form = ShopUserLoginForm(data=request.POST)
         if form.is_valid():

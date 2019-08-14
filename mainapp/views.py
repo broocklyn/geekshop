@@ -12,7 +12,7 @@ def get_products_menu():
 
 def get_basket(request):
     if request.user.is_authenticated:
-        return request.user.basket.all()
+        return request.user.basket.all().order_by('product__category')
     else:
         return []
 

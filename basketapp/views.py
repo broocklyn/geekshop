@@ -51,6 +51,13 @@ def basket_delete(request, pk):
 def basket_update(request, pk, quantity):
     if request.is_ajax():
         basket_obj = get_object_or_404(Basket, pk=pk)
+        quantity = int(quantity)
+        if quantity > 0:
+            basket_obj.quantity = quantity
+            basket_obj.save()
+        else:
+            basket_obj.delete()
+
         context = {
             'basket': get_basket(request),
         }

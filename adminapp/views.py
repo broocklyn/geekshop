@@ -32,4 +32,4 @@ def shopuser_create(request):
         'form': form
     }
 
-    return render(request, 'adminapp/shopuser_update.html', content)
+    return render(request, 'adminapp/shopuser_create.html', content)

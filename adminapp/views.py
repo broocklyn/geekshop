@@ -68,3 +68,11 @@ def shopuser_delete(request, pk):
             'object': user,
         }
         return render(request, 'adminapp/shopuser_delete.html', context)
+
+def productcategory_list(request):
+    object_list = ProductCategory.objects.all()
+    context = {
+        'title': 'админка/категории',
+        'object_list': object_list
+    }
+    return render(request, 'adminapp/productcategory_list.html', context)

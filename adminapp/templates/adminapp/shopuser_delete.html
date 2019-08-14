@@ -6,7 +6,7 @@
 
 {% block container %}
     <div class="user_delete">
-        Уверены, что хотите удалить <b>{{ object.username }}
+        Вы точно хотите удалить пользователя <b>{{ object.username }}
         {% if object.first_name %}
             ({{ object.first_name|title }}
             {% if object.last_name %}

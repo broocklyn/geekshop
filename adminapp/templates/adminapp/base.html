@@ -34,8 +34,8 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{% url 'myadmin:category_list' %}"
-                       class="{% if request.resolver_match.url_name == 'category_list' %}active{% endif %}">
+                    <a href="{% url 'myadmin:productcategory_list' %}"
+                       class="{% if request.resolver_match.url_name == 'productcategory_list' %}active{% endif %}">
                         категории{% if category %}:<span>{{ category.name }}</span>{% endif %}
                     </a>
                 </li>

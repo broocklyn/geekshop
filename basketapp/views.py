@@ -64,5 +64,5 @@ def basket_update(request, pk, quantity):
 
         # print(basket_obj, quantity)
         # return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-        result = render_to_string('basketapp/includes/inc__basket_list.html', context)
+        # result = render_to_string('basketapp/includes/inc__basket_list.html', context)
         return JsonResponse({'result': result})

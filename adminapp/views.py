@@ -7,7 +7,7 @@ from django.urls import reverse
 from adminapp.forms import ShopUserAdminCreateForm, ShopUserAdminUpdateForm
 from authapp.models import ShopUser
 
-
+@user_passes_test(lambda x: x.is_superuser)
 def index(request):
     object_list = ShopUser.objects.all()
 
@@ -18,6 +18,7 @@ def index(request):
     }
     return render(request, 'adminapp/index.html', context)
 
+@user_passes_test(lambda x: x.is_superuser)
 def shopuser_create(request):
     if request.method == 'POST':
         form = ShopUserAdminCreateForm(request.POST, request.FILES)
@@ -34,6 +35,7 @@ def shopuser_create(request):
 
     return render(request, 'adminapp/shopuser_update.html', content)
 
+@user_passes_test(lambda x: x.is_superuser)
 def shopuser_update(request, pk):
     user = get_object_or_404(ShopUser, pk=pk)
     if request.method == 'POST':
@@ -51,6 +53,7 @@ def shopuser_update(request, pk):
 
     return render(request, 'adminapp/shopuser_update.html', content)
 
+@user_passes_test(lambda x: x.is_superuser)
 def shopuser_delete(request, pk):
     # get_object_or_404(ShopUser, pk=pk).delete()
     user = get_object_or_404(ShopUser, pk=pk)

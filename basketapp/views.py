@@ -48,6 +48,7 @@ def basket_delete(request, pk):
     get_object_or_404(Basket, pk=pk).delete()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
+
 def basket_update(request, pk, quantity):
     if request.is_ajax():
         basket_obj = get_object_or_404(Basket, pk=pk)
@@ -58,9 +59,9 @@ def basket_update(request, pk, quantity):
         else:
             basket_obj.delete()
 
-        context = {
-            'basket': get_basket(request),
-        }
+        result = render_to_string('basketapp/includes/inc__basket_list.html',
+                                  context={'basket': get_basket(request)})
+
         # print(basket_obj, quantity)
         # return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
         result = render_to_string('basketapp/includes/inc__basket_list.html', context)

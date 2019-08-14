@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
+from django.template.loader import render_to_string
 from django.urls import reverse
 
 from basketapp.models import Basket
@@ -50,6 +51,10 @@ def basket_delete(request, pk):
 def basket_update(request, pk, quantity):
     if request.is_ajax():
         basket_obj = get_object_or_404(Basket, pk=pk)
-        print(basket_obj, quantity)
+        context = {
+            'basket': get_basket(request),
+        }
+        # print(basket_obj, quantity)
         # return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-        return JsonResponse({'result': True})
+        result = render_to_string('basketapp/includes/inc__basket_list.html', context)
+        return JsonResponse({'result': result})

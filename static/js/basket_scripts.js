@@ -5,8 +5,8 @@ window.onload = function () {
             $.ajax({
                 url: "/basket/update/" + event.target.name + "/" + event.target.value + "/",
                 success: function (data) {
-                    console.log(data);
-                    // $('.basket-list').html(data.result);
+                   // console.log(data);
+                    $('.basket-list').html(data.result);
                 }
             });
         })

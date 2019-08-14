@@ -14,7 +14,7 @@
                      alt="{{ object.username }}">
                 <div class="user_role">
                     {% if object.is_superuser %}администратор{% else %}пользователь{% endif %}
-                    <a href="{#% url 'myadmin:shopuser_update' object.pk %#}"
+                    <a href="{% url 'myadmin:shopuser_update' object.pk %}"
                        class="btn btn-primary">
                         редактировать
                     </a>

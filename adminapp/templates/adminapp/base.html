@@ -23,7 +23,24 @@
     </div>
     {% block menu %}
         <div class="admin_menu">
-            {% include 'adminapp/includes/inc__menu.html' %}
+              <ul class="menu">
+                <li>
+                    <a href="{% url 'main:index' %}">на сайт</a>
+                </li>
+                <li>
+                    <a href="{% url 'myadmin:index' %}"
+                       class="{% if request.resolver_match.url_name == 'index' %}active{% endif %}">
+                        пользователи
+                    </a>
+                </li>
+<!--                <li>
+                    <a href="{#% url 'myadmin:productcategory_list' %#}"
+                       class="{% if request.resolver_match.url_name == 'productcategory_list' %}active{% endif %}">
+                        категории{% if category %}:<span>{{ category.name }}</span>{% endif %}
+                    </a>
+                </li>-->
+            </ul>
+
         </div>
     {% endblock %}
 

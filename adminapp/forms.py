@@ -4,7 +4,7 @@ from django.forms import forms, HiddenInput
 from authapp.models import ShopUser
 
 
-class ShopUserCreateForm(UserCreationForm):
+class ShopUserAdminCreateForm(UserCreationForm):
     class Meta:
         model = ShopUser
         fields = ('username', 'first_name', 'password1', 'password2', 'email', 'age', 'avatar')

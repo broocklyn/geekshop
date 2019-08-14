@@ -5,7 +5,7 @@ from django.shortcuts import render
 
 def index(request):
     context = {
-        'page_title': 'админка',
+        'page_title': 'админка/пользователи',
 
     }
     return render(request, 'adminapp/index.html', context)

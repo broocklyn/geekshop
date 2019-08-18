@@ -8,7 +8,7 @@ from django.urls import reverse
 from adminapp.forms import ShopUserAdminCreateForm, ShopUserAdminUpdateForm, ProductCategoryAdminUpdateForm, \
     ProductAdminUpdateForm
 from authapp.models import ShopUser
-from mainapp.models import ProductCategory
+from mainapp.models import ProductCategory, Product
 
 
 @user_passes_test(lambda x: x.is_superuser)

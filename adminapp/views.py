@@ -73,6 +73,7 @@ def shopuser_delete(request, pk):
         }
         return render(request, 'adminapp/shopuser_delete.html', context)
 
+
 def productcategory_list(request):
     object_list = ProductCategory.objects.all()
     context = {
@@ -132,3 +133,14 @@ def productcategory_delete(request, pk):
             'object': productcategory,
         }
         return render(request, 'adminapp/productcategory_delete.html', context)
+
+@user_passes_test(lambda x: x.is_superuser)
+def productcategory_products(request, pk):
+    productcategory = get_object_or_404(ProductCategory, pk=pk)
+    content = {
+        'title': 'админка/товары категории',
+        'object': productcategory,
+        'object_list': productcategory.product_set.all()
+    }
+
+    return render(request, 'adminapp/product_list.html', content)

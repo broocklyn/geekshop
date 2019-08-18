@@ -12,4 +12,6 @@ urlpatterns = [
     re_path(r'^productcategory/create/$', adminapp.productcategory_create, name='productcategory_create'),
     re_path(r'^productcategory/update/(?P<pk>\d+)/$', adminapp.productcategory_update, name='productcategory_update'),
     re_path(r'^productcategory/delete/(?P<pk>\d+)/$', adminapp.productcategory_delete, name='productcategory_delete'),
+    re_path(r'^productcategory/products/(?P<pk>\d+)/$', adminapp.productcategory_products,
+            name='productcategory_products'),
 ]

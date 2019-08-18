@@ -1,5 +1,6 @@
 import random
 
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
@@ -20,8 +21,10 @@ def get_basket(request):
 def get_hot_product():
     return random.choice(Product.objects.all())
 
+
 def same_products(hot_product):
     return hot_product.category.product_set.exclude(pk=hot_product.pk)
+
 
 def index(request):
     context = {
@@ -76,7 +79,7 @@ def products(request):
     return render(request, 'mainapp/products.html', context)
 
 
-def category(request, pk):
+def category(request, pk, page=1):
     pk = int(pk)
     if pk == 0:
         category = {
@@ -90,15 +93,25 @@ def category(request, pk):
         #   category = ProductCategory.objects.get(pk=pk)
         category_products = category.product_set.all()
     #       category_products = Product.objects.filter(category=pk)
+
+    paginator = Paginator(category_products, 2)
+    try:
+        products_paginator = paginator.page(page)
+    except PageNotAnInteger:
+        products_paginator = paginator.page(1)
+    except EmptyPage:
+        products_paginator = paginator.page(paginator.num_pages)
+
     context = {
         'page_title': 'раздел каталога товаров',
         'products_menu': get_products_menu(),
         'category': category,
-        'category_products': category_products,
+        'category_products': products_paginator,
         'basket': get_basket(request),
 
     }
     return render(request, 'mainapp/category_products.html', context)
+
 
 def product(request, pk):
     product = get_object_or_404(Product, pk=pk)
@@ -111,4 +124,3 @@ def product(request, pk):
         'basket': get_basket(request),
     }
     return render(request, 'mainapp/product_page.html', context)
-

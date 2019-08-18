@@ -139,7 +139,7 @@ def productcategory_products(request, pk):
     productcategory = get_object_or_404(ProductCategory, pk=pk)
     content = {
         'title': 'админка/товары категории',
-        'object': productcategory,
+        'productcategory': productcategory,
         'object_list': productcategory.product_set.all()
     }
 

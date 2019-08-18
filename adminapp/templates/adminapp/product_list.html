@@ -8,20 +8,22 @@
         новый продукт
     </a>
     {% for object in object_list %}
-    <div class="category_record {% if not object.is_active %}not_active{% endif %}">
-        <div class="category_name">
+    <div class="product_record {% if not object.is_active %}not_active{% endif %}">
+        <img src="/media/{{ object.image|default:'products_images/default.jpg' }}"
+             alt="{{ object.name }}">
+        <div class="product_name">
             {{ object.name|title }}
         </div>
-        <div class="category_actions">
-            <a href="{#% url 'myadmin:productcategory_products' object.pk %#}"
+        <div class="product_actions">
+            <a href="{% url 'myadmin:product_read' object.pk %}"
                class="btn btn-info">
                 подробнее
             </a>
-            <a href="{#% url 'myadmin:productcategory_update' object.pk %#}"
+            <a href="{% url 'myadmin:product_update' object.pk %}"
                class="btn btn-success">
                 редактировать
             </a>
-            <a href="{#% url 'myadmin:productcategory_delete' object.pk %#}"
+            <a href="{% url 'myadmin:product_delete' object.pk %}"
                class="btn btn-danger">
                 удалить
             </a>

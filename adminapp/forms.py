@@ -2,7 +2,8 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, User
 from django.forms import forms, HiddenInput, ModelForm
 
 from authapp.models import ShopUser
-from mainapp.models import ProductCategory
+from mainapp.models import ProductCategory, Product
+
 
 class ShopUserAdminCreateForm(UserCreationForm):
     class Meta:
@@ -48,6 +49,16 @@ class ShopUserAdminUpdateForm(UserChangeForm):
 class ProductCategoryAdminUpdateForm(ModelForm):
     class Meta:
         model = ProductCategory
+        fields = '__all__'
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            field.widget.attrs['class'] = 'form-control'
+
+class ProductAdminUpdateForm(ModelForm):
+    class Meta:
+        model = Product
         fields = '__all__'
 
     def __init__(self, *args, **kwargs):

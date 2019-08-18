@@ -5,7 +5,7 @@ from django.shortcuts import render, get_object_or_404
 # Create your views here.
 from django.urls import reverse
 
-from adminapp.forms import ShopUserAdminCreateForm, ShopUserAdminUpdateForm
+from adminapp.forms import ShopUserAdminCreateForm, ShopUserAdminUpdateForm, ProductCategoryAdminUpdateForm
 from authapp.models import ShopUser
 from mainapp.models import ProductCategory
 
@@ -37,6 +37,8 @@ def shopuser_create(request):
     }
 
     return render(request, 'adminapp/shopuser_update.html', content)
+
+
 
 @user_passes_test(lambda x: x.is_superuser)
 def shopuser_update(request, pk):
@@ -78,3 +80,21 @@ def productcategory_list(request):
         'object_list': object_list
     }
     return render(request, 'adminapp/productcategory_list.html', context)
+
+
+@user_passes_test(lambda x: x.is_superuser)
+def productcategory_create(request):
+    if request.method == 'POST':
+        form = ProductCategoryAdminUpdateForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('adminapp:productcategory_list'))
+    else:
+        form = ProductCategoryAdminUpdateForm()
+
+    context = {
+        'title': 'админка/новая категория товара',
+        'form': form
+    }
+
+    return render(request, 'adminapp/productcategory_update.html', context)

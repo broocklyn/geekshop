@@ -11,7 +11,7 @@
             {% csrf_token %}
             <input class="btn btn-danger" type="submit" value="удалить">
         </form>
-        <a href="{% url 'myadmin:productcategory_products' request.resolver_match.kwargs.pk %}"
+        <a href="{% url 'myadmin:productcategory_products' object.category.pk %}"
            class="btn btn-primary form-control last">
             к списку товаров
         </a>

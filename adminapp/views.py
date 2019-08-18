@@ -27,7 +27,7 @@ def shopuser_create(request):
         form = ShopUserAdminCreateForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('adminapp:index'))
+            return HttpResponseRedirect(reverse('myadmin:index'))
     else:
         form = ShopUserAdminCreateForm()
 
@@ -47,7 +47,7 @@ def shopuser_update(request, pk):
         form = ShopUserAdminUpdateForm(request.POST, request.FILES, instance=user)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('adminapp:index'))
+            return HttpResponseRedirect(reverse('myadmin:index'))
     else:
         form = ShopUserAdminUpdateForm(instance=user)
 
@@ -65,7 +65,7 @@ def shopuser_delete(request, pk):
     if request.method == 'POST':
         user.is_active = False
         user.save()
-        return HttpResponseRedirect(reverse('adminapp:index'))
+        return HttpResponseRedirect(reverse('myadmin:index'))
     elif request.method == 'GET':
         context = {
             'page_title': 'админка/удаление пользователя',
@@ -88,7 +88,7 @@ def productcategory_create(request):
         form = ProductCategoryAdminUpdateForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('adminapp:productcategory_list'))
+            return HttpResponseRedirect(reverse('myadmin:productcategory_list'))
     else:
         form = ProductCategoryAdminUpdateForm()
 
@@ -107,7 +107,7 @@ def productcategory_update(request, pk):
         form = ProductCategoryAdminUpdateForm(request.POST, request.FILES, instance=productcategory)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('adminapp:productcategory_list'))
+            return HttpResponseRedirect(reverse('myadmin:productcategory_list'))
     else:
         form = ProductCategoryAdminUpdateForm(instance=productcategory)
 

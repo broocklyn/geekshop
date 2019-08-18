@@ -117,3 +117,18 @@ def productcategory_update(request, pk):
     }
 
     return render(request, 'adminapp/productcategory_update.html', context)
+
+
+@user_passes_test(lambda x: x.is_superuser)
+def productcategory_delete(request, pk):
+    productcategory = get_object_or_404(ProductCategory, pk=pk)
+    if request.method == 'POST':
+        productcategory.is_active = False
+        productcategory.save()
+        return HttpResponseRedirect(reverse('myadmin:productcategory_list'))
+    elif request.method == 'GET':
+        context = {
+            'title': 'админка/удаление категории',
+            'object': productcategory,
+        }
+        return render(request, 'adminapp/productcategory_delete.html', context)

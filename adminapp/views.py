@@ -154,8 +154,7 @@ def product_create(request, pk):
         form = ProductAdminUpdateForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('myadmin:productcategory_products',
-                                                kwargs={'pk': pk}))
+            return HttpResponseRedirect(reverse('myadmin:productcategory_products', kwargs={'pk': pk}))
     else:
         form = ProductAdminUpdateForm(initial={'category': productcategory})
 

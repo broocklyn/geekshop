@@ -6,12 +6,13 @@
 
 {% block container %}
     <div class="user_delete">
-        Вы точно хотите удалить категорию <b>{{ object.name }}</b>?
+        Вы точно хотите удалить товар <b>{{ object.name }}</b>?
         <form method="post">
             {% csrf_token %}
             <input class="btn btn-danger" type="submit" value="удалить">
         </form>
-        <a href="{% url 'myadmin:productcategory_list' %}" class="btn btn-success">
+        <a href="{% url 'myadmin:productcategory_products' request.resolver_match.kwargs.pk %}"
+           class="btn btn-primary form-control last">
             отмена
         </a>
     </div>

@@ -144,3 +144,61 @@ def productcategory_products(request, pk):
     }
 
     return render(request, 'adminapp/product_list.html', content)
+
+
+@user_passes_test(lambda x: x.is_superuser)
+def product_create(request, pk):
+    productcategory = get_object_or_404(ProductCategory, pk=pk)
+    if request.method == 'POST':
+        form = ProductAdminUpdateForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('myadmin:productcategory_products',
+                                                kwargs={'pk': pk}))
+    else:
+        form = ProductAdminUpdateForm(initial={'category': productcategory})
+
+    content = {
+        'title': 'админка/новый товар',
+        'form': form
+    }
+
+    return render(request, 'adminapp/product_update.html', content)
+
+
+@user_passes_test(lambda x: x.is_superuser)
+def product_update(request, pk):
+    product = get_object_or_404(Product, pk=pk)
+    if request.method == 'POST':
+        form = ProductAdminUpdateForm(request.POST, request.FILES, instance=product)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('myadmin:productcategory_products',
+                                                kwargs={'pk': product.category.pk}))
+    else:
+        form = ProductAdminUpdateForm(instance=product)
+
+    content = {
+        'title': 'админка/редактирование товара',
+        'form': form,
+        'object': product
+    }
+
+    return render(request, 'adminapp/product_update.html', content)
+
+
+@user_passes_test(lambda x: x.is_superuser)
+def product_delete(request, pk):
+    product = get_object_or_404(Product, pk=pk)
+    if request.method == 'POST':
+        product.is_active = False
+        product.save()
+        return HttpResponseRedirect(reverse('myadmin:productcategory_products',
+                                            kwargs={'pk': product.category.pk}))
+    elif request.method == 'GET':
+        context = {
+            'title': 'админка/удаление продукта',
+            'object': product,
+        }
+        return render(request, 'adminapp/product_delete.html', context)
+

@@ -15,15 +15,15 @@
             {{ object.name|title }}
         </div>
         <div class="product_actions">
-            <a href="{% url 'myadmin:product_read' object.pk %}"
+            <a href="#{% url 'myadmin:product_read' object.pk %#}"
                class="btn btn-info">
                 подробнее
             </a>
-            <a href="{% url 'myadmin:product_update' object.pk %}"
+            <a href="{#% url 'myadmin:product_update' object.pk %#}"
                class="btn btn-success">
                 редактировать
             </a>
-            <a href="{% url 'myadmin:product_delete' object.pk %}"
+            <a href="{#% url 'myadmin:product_delete' object.pk %#}"
                class="btn btn-danger">
                 удалить
             </a>

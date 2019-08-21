@@ -5,7 +5,7 @@ from django.shortcuts import render, get_object_or_404
 # Create your views here.
 from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
-from django.views.generic import ListView, CreateView, UpdateView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
 from adminapp.forms import ShopUserAdminCreateForm, ShopUserAdminUpdateForm, ProductCategoryAdminUpdateForm, \
     ProductAdminUpdateForm
@@ -148,20 +148,30 @@ class ProductCategoryUpdateView(UpdateView):
         context['title'] = 'категории/редактирование категории товара'
         return context
 
-@user_passes_test(lambda x: x.is_superuser)
-def productcategory_delete(request, pk):
-    productcategory = get_object_or_404(ProductCategory, pk=pk)
-    if request.method == 'POST':
-        productcategory.is_active = False
-        productcategory.save()
-        return HttpResponseRedirect(reverse('myadmin:productcategory_list'))
-    elif request.method == 'GET':
-        context = {
-            'title': 'админка/удаление категории',
-            'object': productcategory,
-        }
-        return render(request, 'adminapp/productcategory_delete.html', context)
+# @user_passes_test(lambda x: x.is_superuser)
+# def productcategory_delete(request, pk):
+#     productcategory = get_object_or_404(ProductCategory, pk=pk)
+#     if request.method == 'POST':
+#         productcategory.is_active = False
+#         productcategory.save()
+#         return HttpResponseRedirect(reverse('myadmin:productcategory_list'))
+#     elif request.method == 'GET':
+#         context = {
+#             'title': 'админка/удаление категории',
+#             'object': productcategory,
+#         }
+#         return render(request, 'adminapp/productcategory_delete.html', context)
 
+class ProductCategoryDeleteView(DeleteView):
+    model = ProductCategory
+    success_url = reverse_lazy('myadmin:productcategory_list')
+
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.is_active = False
+        self.object.save()
+
+        return HttpResponseRedirect(self.get_success_url())
 
 @user_passes_test(lambda x: x.is_superuser)
 def productcategory_products(request, pk):

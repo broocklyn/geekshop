@@ -27,7 +27,7 @@ from mainapp.models import ProductCategory, Product
 
 class ShopUserListView(ListView):
     model = ShopUser
-    #    template_name = 'adminapp/shopuser_list.html'
+#    template_name = 'adminapp/shopuser_list.html'
 
     @method_decorator(user_passes_test(lambda x: x.is_superuser))
     def dispatch(self, *args, **kwargs):

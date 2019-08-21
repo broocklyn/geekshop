@@ -3,9 +3,9 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
-from django.views.generic import ListView
+from django.views.generic import ListView, CreateView
 
 from adminapp.forms import ShopUserAdminCreateForm, ShopUserAdminUpdateForm, ProductCategoryAdminUpdateForm, \
     ProductAdminUpdateForm
@@ -96,22 +96,28 @@ def productcategory_list(request):
     return render(request, 'adminapp/productcategory_list.html', context)
 
 
-@user_passes_test(lambda x: x.is_superuser)
-def productcategory_create(request):
-    if request.method == 'POST':
-        form = ProductCategoryAdminUpdateForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(reverse('myadmin:productcategory_list'))
-    else:
-        form = ProductCategoryAdminUpdateForm()
+# @user_passes_test(lambda x: x.is_superuser)
+# def productcategory_create(request):
+#     if request.method == 'POST':
+#         form = ProductCategoryAdminUpdateForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             form.save()
+#             return HttpResponseRedirect(reverse('myadmin:productcategory_list'))
+#     else:
+#         form = ProductCategoryAdminUpdateForm()
+#
+#     context = {
+#         'title': 'админка/новая категория товара',
+#         'form': form
+#     }
+#
+#     return render(request, 'adminapp/productcategory_update.html', context)
 
-    context = {
-        'title': 'админка/новая категория товара',
-        'form': form
-    }
-
-    return render(request, 'adminapp/productcategory_update.html', context)
+class ProductCategoryCreateView(CreateView):
+    model = ProductCategory
+    success_url = reverse_lazy('myadmin:productcategory_list')
+    # fields = '__all__'
+    form_class = ProductCategoryAdminUpdateForm
 
 
 @user_passes_test(lambda x: x.is_superuser)

@@ -5,7 +5,7 @@ from django.shortcuts import render, get_object_or_404
 # Create your views here.
 from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, UpdateView
 
 from adminapp.forms import ShopUserAdminCreateForm, ShopUserAdminUpdateForm, ProductCategoryAdminUpdateForm, \
     ProductAdminUpdateForm
@@ -120,24 +120,33 @@ class ProductCategoryCreateView(CreateView):
     form_class = ProductCategoryAdminUpdateForm
 
 
-@user_passes_test(lambda x: x.is_superuser)
-def productcategory_update(request, pk):
-    productcategory = get_object_or_404(ProductCategory, pk=pk)
-    if request.method == 'POST':
-        form = ProductCategoryAdminUpdateForm(request.POST, request.FILES, instance=productcategory)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(reverse('myadmin:productcategory_list'))
-    else:
-        form = ProductCategoryAdminUpdateForm(instance=productcategory)
+# @user_passes_test(lambda x: x.is_superuser)
+# def productcategory_update(request, pk):
+#     productcategory = get_object_or_404(ProductCategory, pk=pk)
+#     if request.method == 'POST':
+#         form = ProductCategoryAdminUpdateForm(request.POST, request.FILES, instance=productcategory)
+#         if form.is_valid():
+#             form.save()
+#             return HttpResponseRedirect(reverse('myadmin:productcategory_list'))
+#     else:
+#         form = ProductCategoryAdminUpdateForm(instance=productcategory)
+#
+#     context = {
+#         'title': 'админка/редактирование категории товара',
+#         'form': form
+#     }
+#
+#     return render(request, 'adminapp/productcategory_update.html', context)
 
-    context = {
-        'title': 'админка/редактирование категории товара',
-        'form': form
-    }
+class ProductCategoryUpdateView(UpdateView):
+    model = ProductCategory
+    success_url = reverse_lazy('myadmin:productcategory_list')
+    form_class = ProductCategoryAdminUpdateForm
 
-    return render(request, 'adminapp/productcategory_update.html', context)
-
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'категории/редактирование категории товара'
+        return context
 
 @user_passes_test(lambda x: x.is_superuser)
 def productcategory_delete(request, pk):

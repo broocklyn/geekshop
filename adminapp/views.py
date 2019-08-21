@@ -4,6 +4,8 @@ from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
 from django.urls import reverse
+from django.utils.decorators import method_decorator
+from django.views.generic import ListView
 
 from adminapp.forms import ShopUserAdminCreateForm, ShopUserAdminUpdateForm, ProductCategoryAdminUpdateForm, \
     ProductAdminUpdateForm
@@ -11,16 +13,26 @@ from authapp.models import ShopUser
 from mainapp.models import ProductCategory, Product
 
 
-@user_passes_test(lambda x: x.is_superuser)
-def index(request):
-    object_list = ShopUser.objects.all()
+# @user_passes_test(lambda x: x.is_superuser)
+# def index(request):
+#     object_list = ShopUser.objects.all()
+#
+#     context = {
+#         'page_title': 'админка/пользователи',
+#         'object_list': object_list,
+#
+#     }
+#     return render(request, 'adminapp/shopuser_list.html', context)
 
-    context = {
-        'page_title': 'админка/пользователи',
-        'object_list': object_list,
 
-    }
-    return render(request, 'adminapp/index.html', context)
+class ShopUserListView(ListView):
+    model = ShopUser
+    #    template_name = 'adminapp/shopuser_list.html'
+
+    @method_decorator(user_passes_test(lambda x: x.is_superuser))
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+
 
 @user_passes_test(lambda x: x.is_superuser)
 def shopuser_create(request):
@@ -40,7 +52,6 @@ def shopuser_create(request):
     return render(request, 'adminapp/shopuser_update.html', content)
 
 
-
 @user_passes_test(lambda x: x.is_superuser)
 def shopuser_update(request, pk):
     user = get_object_or_404(ShopUser, pk=pk)
@@ -58,6 +69,7 @@ def shopuser_update(request, pk):
     }
 
     return render(request, 'adminapp/shopuser_update.html', content)
+
 
 @user_passes_test(lambda x: x.is_superuser)
 def shopuser_delete(request, pk):
@@ -134,6 +146,7 @@ def productcategory_delete(request, pk):
             'object': productcategory,
         }
         return render(request, 'adminapp/productcategory_delete.html', context)
+
 
 @user_passes_test(lambda x: x.is_superuser)
 def productcategory_products(request, pk):
@@ -212,4 +225,3 @@ def product_read(request, pk):
     }
 
     return render(request, 'adminapp/product_read.html', context)
-

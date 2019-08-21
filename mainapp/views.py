@@ -32,7 +32,7 @@ def index(request):
         'basket': get_basket(request),
 
     }
-    return render(request, 'mainapp/index.html', context)
+    return render(request, 'mainapp/shopuser_list.html', context)
 
 
 def contact(request):

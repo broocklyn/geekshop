@@ -18,7 +18,7 @@ def index(request):
         'basket': get_basket(request),
 
     }
-    return render(request, 'basketapp/index.html', context)
+    return render(request, 'basketapp/shopuser_list.html', context)
 
 
 @login_required

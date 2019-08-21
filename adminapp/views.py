@@ -5,7 +5,7 @@ from django.shortcuts import render, get_object_or_404
 # Create your views here.
 from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 
 from adminapp.forms import ShopUserAdminCreateForm, ShopUserAdminUpdateForm, ProductCategoryAdminUpdateForm, \
     ProductAdminUpdateForm
@@ -241,12 +241,15 @@ def product_delete(request, pk):
         return render(request, 'adminapp/product_delete.html', context)
 
 
-@user_passes_test(lambda x: x.is_superuser)
-def product_read(request, pk):
-    product = get_object_or_404(Product, pk=pk)
-    context = {
-        'title': 'админка/товар подробно',
-        'object': product
-    }
+# @user_passes_test(lambda x: x.is_superuser)
+# def product_read(request, pk):
+#     product = get_object_or_404(Product, pk=pk)
+#     context = {
+#         'title': 'админка/товар подробно',
+#         'object': product
+#     }
+#
+#     return render(request, 'adminapp/product_read.html', context)
 
-    return render(request, 'adminapp/product_read.html', context)
+class ProductDetailView(DetailView):
+    model = Product

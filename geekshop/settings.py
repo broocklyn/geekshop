@@ -127,7 +127,7 @@ STATICFILES_DIRS = (
     'static',
 )
 
-MEDIA_URL = '/media/'
+MEDIA_URL = '/media777/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 JSON_PATH = 'mainapp/json'

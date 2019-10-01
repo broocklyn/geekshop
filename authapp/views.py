@@ -80,4 +80,4 @@ def send_verify_mail(user):
                 f"на портале {settings.DOMAIN_NAME} перейдите по "
                 f"ссылке:\n{settings.DOMAIN_NAME}{verify_link}")
 
-    return send_mail(title, message, settings)
+    return send_mail(title, message, settings.EMAIL_HOST_USER, [user.email], fail_silently=False)

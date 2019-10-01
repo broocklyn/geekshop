@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.urls import reverse
+from django.core.mail import send_mail
+from django.conf import settings
 
 from authapp.forms import ShopUserLoginForm, ShopUserUpdateForm
 from django.contrib import auth
@@ -69,3 +71,13 @@ def update(request):
     }
 
     return render(request, 'authapp/update.html', context)
+
+def send_verify_mail(user):
+    verify_link = reverse('auth:verify', args=[user.email, user.activation_key])
+
+    title = f"Подтверждение учетной записи {user.username}"
+    message = (f"Для подтверждения учетной записи {user.username}"
+                f"на портале {settings.DOMAIN_NAME} перейдите по "
+                f"ссылке:\n{settings.DOMAIN_NAME}{verify_link}")
+
+    return send_mail(title, message, settings)

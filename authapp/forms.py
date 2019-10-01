@@ -1,3 +1,6 @@
+import random
+import hashlib
+
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
 from django.forms import forms, HiddenInput
 
@@ -46,6 +49,21 @@ class ShopUserUpdateForm(UserChangeForm):
             field.help_text = ''
             if field_name == 'password':
                 field.widget = HiddenInput()
+
+    def save(self, commit=True):
+        user = super(ShopUserUpdateForm, self).save()
+        user.is_active = False
+
+        salt = hashlib.sha1(
+            str(random.random()).encode('utf-8')
+        ).hexdigest()[:6]
+
+        user.is_activation_key = hashlib.sha1(
+            (user.email + salt).encode('utf-8')
+        ).hexdigest()
+        user.save()
+
+        return user
 
     def clean_age(self):
         data = self.cleaned_data['age']

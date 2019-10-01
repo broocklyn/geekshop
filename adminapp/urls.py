@@ -23,9 +23,9 @@ urlpatterns = [
     path('productcategory/products/<int:pk>/', adminapp.productcategory_products,
             name='productcategory_products'),
 
-    path('product/create/(?P<pk>\d+)/', adminapp.product_create, name='product_create'),
-    path('product/update/(?P<pk>\d+)/', adminapp.product_update, name='product_update'),
-    path('product/delete/(?P<pk>\d+)/', adminapp.product_delete, name='product_delete'),
+    path('product/create/<int:pk>/', adminapp.product_create, name='product_create'),
+    path('product/update/<int:pk>/', adminapp.product_update, name='product_update'),
+    path('product/delete/<int:pk>/', adminapp.product_delete, name='product_delete'),
     # re_path(r'^product/read/(?P<pk>\d+)/$', adminapp.product_read, name='product_read'),
-    path('product/read/(?P<pk>\d+)/', adminapp.ProductDetailView.as_view(), name='product_read'),
+    path('product/read/<int:pk>/', adminapp.ProductDetailView.as_view(), name='product_read'),
 ]

@@ -5,7 +5,7 @@ app_name = "adminapp"
 
 urlpatterns = [
     # re_path(r'^$', adminapp.index, name='index'),
-    path('$', adminapp.ShopUserListView.as_view(), name='index'),
+    path('', adminapp.ShopUserListView.as_view(), name='index'),
     path('shopuser/create/', adminapp.shopuser_create, name='shopuser_create'),
     path('shopuser/update/<int:pk>/', adminapp.shopuser_update, name='shopuser_update'),
     path('shopuser/delete/<int:pk>/', adminapp.shopuser_delete, name='shopuser_delete'),

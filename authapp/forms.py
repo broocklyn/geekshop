@@ -37,7 +37,7 @@ class ShopUserRegisterForm(UserCreationForm):
             str(random.random()).encode('utf-8')
         ).hexdigest()[:6]
 
-        user.is_activation_key = hashlib.sha1(
+        user.activation_key = hashlib.sha1(
             (user.email + salt).encode('utf-8')
         ).hexdigest()
         user.save()

@@ -29,6 +29,21 @@ class ShopUserRegisterForm(UserCreationForm):
             field.widget.attrs['class'] = 'form-control'
         #   field.help_text = ''
 
+    def save(self, commit=True):
+        user = super(ShopUserRegisterForm, self).save()
+        user.is_active = False
+
+        salt = hashlib.sha1(
+            str(random.random()).encode('utf-8')
+        ).hexdigest()[:6]
+
+        user.is_activation_key = hashlib.sha1(
+            (user.email + salt).encode('utf-8')
+        ).hexdigest()
+        user.save()
+
+        return user
+
     def clean_age(self):
         data = self.cleaned_data['age']
         if data < 18:
@@ -50,20 +65,6 @@ class ShopUserUpdateForm(UserChangeForm):
             if field_name == 'password':
                 field.widget = HiddenInput()
 
-    def save(self, commit=True):
-        user = super(ShopUserUpdateForm, self).save()
-        user.is_active = False
-
-        salt = hashlib.sha1(
-            str(random.random()).encode('utf-8')
-        ).hexdigest()[:6]
-
-        user.is_activation_key = hashlib.sha1(
-            (user.email + salt).encode('utf-8')
-        ).hexdigest()
-        user.save()
-
-        return user
 
     def clean_age(self):
         data = self.cleaned_data['age']

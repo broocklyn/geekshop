@@ -52,11 +52,11 @@ def register(request):
                 print('Ошибка отправки')
                 return HttpResponseRedirect(reverse('auth:login'))
     else:
-        form = ShopUserRegisterForm()
+        register_form = ShopUserRegisterForm()
 
     content = {
         'title': 'регистрация в системе',
-        'form': form
+        'form': register_form
     }
 
     return render(request, 'authapp/register.html', content)

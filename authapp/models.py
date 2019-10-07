@@ -16,3 +16,12 @@ class ShopUser(AbstractUser):
             return False
         else:
             return True
+
+class ShopUserProfile(models.Model):
+    MALE = 'M'
+    FEMALE = 'W'
+
+    GENDER_CHOICES = (
+        (MALE, 'М'),
+        (FEMALE, 'Ж'),
+    )

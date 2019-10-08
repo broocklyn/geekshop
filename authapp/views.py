@@ -69,7 +69,7 @@ def update(request):
 
         profile_form = ShopUserProfileEditForm(request.POST, instance=request.user.shopuserprofile)
 
-        if form.is_valid():
+        if form.is_valid() and profile_form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('auth:update'))
     else:

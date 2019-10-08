@@ -3,11 +3,12 @@ from django.urls import reverse
 from django.core.mail import send_mail
 from django.conf import settings
 
-from authapp.forms import ShopUserLoginForm, ShopUserUpdateForm
+from authapp.forms import ShopUserLoginForm, ShopUserUpdateForm, ShopUserProfileEditForm
 from django.contrib import auth
 from django.http import HttpResponseRedirect
 from authapp.forms import ShopUserRegisterForm
 from authapp.models import ShopUser
+from django.db import transaction
 
 
 def login(request):
@@ -61,19 +62,25 @@ def register(request):
 
     return render(request, 'authapp/register.html', content)
 
-
+@transaction.atomic
 def update(request):
     if request.method == 'POST':
         form = ShopUserUpdateForm(request.POST, request.FILES, instance=request.user)
+
+        profile_form = ShopUserProfileEditForm(request.POST, instance=request.user.shopuserprofile)
+
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('auth:update'))
     else:
         form = ShopUserUpdateForm(instance=request.user)
+        profile_form = ShopUserProfileEditForm(instance=request.user.shopuserprofile)
 
     context = {
         'title': 'редактирование',
-        'form': form
+        'form': form,
+        'profile_form': profile_form
+
     }
 
     return render(request, 'authapp/update.html', context)

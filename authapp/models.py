@@ -32,7 +32,7 @@ class ShopUserProfile(models.Model):
     tagline = models.CharField(verbose_name='теги', max_length=128, blank=True)
     aboutMe = models.TextField(verbose_name='о себе', max_length=512, blank=True)
     gender = models.CharField(verbose_name='пол', max_length=1, choices=GENDER_CHOICES, blank=True)
-    webpage = models.CharField(verbose_name='страница', max_length=128, blank=True)
+    webpage = models.CharField(verbose_name='страница в vk', max_length=128, blank=True)
 
     @receiver(post_save, sender=ShopUser)
     def create_user_profile(sender, instance, created, **kwargs):

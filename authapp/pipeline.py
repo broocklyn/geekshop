@@ -28,7 +28,7 @@ def save_user_profile(backend, user, response, *args, **kwargs):
         return
 
     data = resp.json()['response'][0]
-    vk_url = 'vk.com/'
+    vk_url = 'https://vk.com/'
     if data['sex']:
         user.shopuserprofile.gender = ShopUserProfile.MALE if data['sex'] == 2 else ShopUserProfile.FEMALE
 
@@ -36,7 +36,7 @@ def save_user_profile(backend, user, response, *args, **kwargs):
         user.shopuserprofile.aboutMe = data['about']
 
     if data['domain']:
-        user.shopuserprofile.webpage = data['domain']
+        user.shopuserprofile.webpage = vk_url + data['domain']
 
     if data['bdate']:
         bdate = datetime.strptime(data['bdate'], '%d.%m.%Y').date()

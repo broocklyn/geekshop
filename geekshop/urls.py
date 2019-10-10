@@ -16,6 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, re_path, include
 import mainapp.views as mainapp
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
     re_path(r'^', include('mainapp.urls', namespace='main')),
@@ -24,10 +27,10 @@ urlpatterns = [
     re_path(r'^myadmin/', include('adminapp.urls', namespace='myadmin')),
 
     path('admin/', admin.site.urls),
+    path('', include('social_django.urls', namespace='social')),
+
 ]
 
-from django.conf import settings
-from django.conf.urls.static import static
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

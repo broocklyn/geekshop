@@ -10,7 +10,7 @@
                class="{% if request.resolver_match.url_name == 'contact' %}active{% endif %}">контакты</a></li>
         {% if user.is_authenticated %}
         <li>
-            <a href="{% url 'auth:update' %}">{{ user.first_name|default:'пользователь' }}</a>
+            <div class="dropdown">  </div>
         </li>
         {% endif %}
            {% if user.is_superuser %}

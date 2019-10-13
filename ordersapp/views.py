@@ -90,3 +90,11 @@ class OrderItemsUpdate(UpdateView):
             self.object.delete()
 
         return super(OrderItemsUpdate, self).form_valid(form)
+
+
+class OrderDelete(DeleteView):
+    model = Order
+    success_url = reverse_lazy('ordersapp:orders_list')
+
+
+

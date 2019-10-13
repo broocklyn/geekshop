@@ -97,4 +97,14 @@ class OrderDelete(DeleteView):
     success_url = reverse_lazy('ordersapp:orders_list')
 
 
+class OrderRead(DetailView):
+    model = Order
+
+    def get_context_data(self, **kwargs):
+        context = super(OrderRead, self).get_context_data(**kwargs)
+        context['title'] = 'заказ/просмотр'
+        return context
+
+
+
 

@@ -8,6 +8,20 @@ from django.views.generic.detail import DetailView
 from basketapp.models import Basket
 from ordersapp.forms import OrderItemForm
 
+from django.dispatch import receiver
+from django.db.models.signals import pre_save, pre_delete
+
+
+@receiver(pre_save, sender=OrderItem)
+@receiver(pre_save, sender=Basket)
+def product_quantity_update_save(sender, update_fields, instance, **kwargs):
+    if update_fields in ('quantity' or 'product'):
+        if instance.pk:
+            instance.product.quantity -= instance.quantity - sender.get_item(instance.pk).quantity
+        else:
+            instance.product.quantity -= instance.quantity
+        instance.product.save()
+
 
 # Create your views here.
 class OrderList(ListView):

@@ -10,6 +10,7 @@ from mainapp.models import Product
 #             object.product.quantity += object.quantity
 #             object.product.save()
 #         super(BasketQuerySet, self).delete()
+from ordersapp.models import OrderItem
 
 
 class Basket(models.Model):
@@ -36,6 +37,19 @@ class Basket(models.Model):
     def total_cost(self):
         "return total cost for user"
         return sum([el.product_cost for el in self.user.basket.all()])
+
+    # @staticmethod
+    # def get_items(user):
+    #     return Basket.objects.filter(user=user).order_by('product__category')
+    #
+    # @staticmethod
+    # def get_item(pk):
+    #     return OrderItem.objects.filter(pk=pk).first()
+    #
+    # @staticmethod
+    # def get_product(user, product):
+    #     return Basket.objects.filter(user=user, product=product)    \
+
 
     # def delete(self, using=None, keep_parents=False):
     #     self.product.quantity += self.quantity

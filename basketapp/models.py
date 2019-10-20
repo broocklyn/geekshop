@@ -4,6 +4,14 @@ from django.conf import settings
 from mainapp.models import Product
 
 
+class BasketQuerySet(models.QuerySet):
+    def delete(self, *args, **kwargs):
+        for object in self:
+            object.product.quantity += object.quantity
+            object.product.save()
+        super(BasketQuerySet, self).delete(*args, **kwargs)
+
+
 class Basket(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.CASCADE,
@@ -31,3 +39,4 @@ class Basket(models.Model):
         self.product.quantity += self.quantity
         self.product.save()
         super(self.__class__, self).delete()
+

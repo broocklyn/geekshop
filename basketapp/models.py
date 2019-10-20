@@ -5,11 +5,11 @@ from mainapp.models import Product
 
 
 class BasketQuerySet(models.QuerySet):
-    def delete(self, *args, **kwargs):
+    def delete(self):
         for object in self:
             object.product.quantity += object.quantity
             object.product.save()
-        super(BasketQuerySet, self).delete(*args, **kwargs)
+        super(BasketQuerySet, self).delete()
 
 
 class Basket(models.Model):
@@ -19,6 +19,8 @@ class Basket(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(verbose_name='количество', default=0)
     add_datetime = models.DateTimeField(verbose_name='время', auto_now_add=True)
+
+    objects = BasketQuerySet.as_manager()
 
     @property
     def product_cost(self):
@@ -39,4 +41,13 @@ class Basket(models.Model):
         self.product.quantity += self.quantity
         self.product.save()
         super(self.__class__, self).delete()
+
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        if self.pk:
+            self.product.quantity -= self.quantity - self.__class__.get_item(self.pk).quantity
+        else:
+            self.product.quantity -= self.quantity
+        self.product.save()
+        super(self.__class__, self).save(*args, **kwargs)
 

@@ -26,3 +26,8 @@ class Basket(models.Model):
     def total_cost(self):
         "return total cost for user"
         return sum([el.product_cost for el in self.user.basket.all()])
+
+    def delete(self, using=None, keep_parents=False):
+        self.product.quantity += self.quantity
+        self.product.save()
+        super(self.__class__, self).delete()

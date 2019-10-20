@@ -70,7 +70,6 @@ class OrderItem(models.Model):
         self.product.save()
         super(self.__class__, self).delete()
 
-    # @staticmethod
-    # def get_item(pk):
-    #     return OrderItem.objects.filter(pk=pk).first()
+    def get_item(pk):
+        return OrderItem.objects.filter(pk=pk).first()
 

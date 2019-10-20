@@ -42,9 +42,9 @@ class Basket(models.Model):
     # def get_items(user):
     #     return Basket.objects.filter(user=user).order_by('product__category')
     #
-    # @staticmethod
-    # def get_item(pk):
-    #     return OrderItem.objects.filter(pk=pk).first()
+
+    def get_item(pk):
+        return OrderItem.objects.filter(pk=pk).first()
     #
     # @staticmethod
     # def get_product(user, product):
